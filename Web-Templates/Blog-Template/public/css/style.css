@@ -1,0 +1,418 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+
+:root{
+  --title: #f5f5f0;
+}
+
+#container{
+  width: 100%;
+}
+
+/* ---------------- header ---------------*/
+#container-header{
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  font-family: monospace;
+  font-size: 1.5em;
+}
+
+.container-title{
+  text-transform: uppercase;
+}
+
+
+.container-description span{
+  background: black;
+  color: white;
+}
+/* ---------------- header ---------------*/
+
+
+
+/* ---------------- main ---------------*/
+
+/* Using grid property to make 2 columns for each section*/
+#container-main{
+  margin: 0 24px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-auto-rows: minmax(50px, auto);
+  grid-gap: 50px;
+  grid-template-areas:
+  "story author"
+  "story posts"
+  "story tags";
+}
+
+#story{
+  grid-area: story;
+}
+
+#author{
+  grid-area: author;
+}
+
+#popular-posts{
+
+  grid-area: posts;
+}
+
+#tags{
+
+  grid-area: tags;
+}
+
+.story{
+  -webkit-box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  -moz-box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  margin-bottom: 50px;
+  width: 100%;
+  height: auto;
+}
+
+.story > .story-img{
+  width: 100%;
+  object-fit: cover;
+}
+
+/* story wrap to margin content of blog */
+.story > .story-wrap{
+  text-transform: uppercase;
+  font-family: monospace;
+  margin: 5px;
+}
+
+.story-wrap > .story-description{
+  font-family: serif;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.story-description > .story-datetime{
+  color: #808080;
+  font-family: cursive;
+  font-size: 15px;
+}
+
+.story-content, .story-comment{
+ font-family: serif;
+ font-size: 14px;
+}
+/* more-detail class is use for define 2 columns. One is right-hand side and other is left-hand side using grid property */
+.more-details{
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+}
+
+.more-details > .story-readmore{
+  width: 100%;
+  height: 15px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #e6e6e6;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-align: center;
+  font-size: 16px;
+}
+
+.more-details > .story-readmore:hover{
+  background: #999;
+  color:black;
+}
+
+.more-details > .story-comment{
+  justify-self: end;
+  cursor: pointer;
+  transition: transform ease-in-out 0.25ms;
+}
+
+.more-details > .story-comment:hover{
+  text-decoration: overline;
+}
+
+/*author class use nornal CSS properties*/
+.author{
+  width: 100%;
+  height: auto;
+  -webkit-box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  -moz-box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+}
+
+.author > .author-img{
+  width: 100%;
+  object-fit: cover;
+}
+
+.author > .author-name, .author-about{
+  margin: 10px 24px;
+  height: auto;
+}
+
+/* title class for popular-posts and tags of blog*/
+.title{
+  background: var(--title);
+  font-weight: 400;
+  padding: 15px;
+  font-size: 22px;
+}
+
+/* popular-posts using flex property to make 1 column for each link */
+.popular-posts{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  -moz-box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+}
+/*each link uses flex property to make row for content*/
+.popular-posts-link {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding-top: 10px;
+  border-bottom: 1px solid gray;
+}
+
+.popular-posts-link:hover{
+  background: #ebebe0;
+  cursor: pointer;
+}
+
+.posts-img, .posts-title, .posts-description{
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
+.posts-img{
+  height: 50px;
+  width: 50px;
+}
+/*tags class has flex property to make 2 columns for title & category*/
+.tags{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  -webkit-box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  -moz-box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+  box-shadow: 0px 2px 9px 3px rgba(140,140,140,1);
+}
+
+/*Grid container uses auto-fit in order to fit column as much as possible.*/
+.tags .tags-category{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  grid-gap: 10px;
+  margin: 10px 5px 0 5px;
+}
+
+.tags .tags-category .button{
+  border:none;
+  border-radius: 2px;
+  background: #f5f5f0;
+  cursor: pointer;
+}
+
+.tags .tags-category .button:hover{
+  background: #555;
+}
+
+.tags .tags-category .active{
+  background: black;
+  color: white;
+}
+/* ---------------- main ---------------*/
+
+/* ---------------- footer ---------------*/
+footer{
+  width: 100%;
+  height: 10%;
+  background: #555;
+}
+
+.container-footer-title{
+  color: white;
+  text-align: center;
+}
+/* ---------------- footer ---------------*/
+
+
+/* ---------------- responsive ---------------*/
+
+@media screen and (max-width: 991px) {
+     /* start of large tablet styles */
+     #container-header{
+       font-size: 1.8em;
+     }
+     #container-main{
+       display: grid;
+       grid-template-columns: 1fr;
+       grid-template-areas:
+       "story"
+       "author"
+       "popular-posts"
+       "tags";
+     }
+     #story{
+       grid-area: story;
+     }
+     #author{
+       grid-area: author;
+     }
+     #tags{
+       grid-area: tags;
+     }
+     #popular-posts{
+       grid-area: popular-posts;
+     }
+     .story-wrap > .story-description{
+       font-size: 18px;
+     }
+
+     .story-description > .story-datetime{
+       font-size: 16px;
+     }
+
+     .story-content, .story-comment{
+      font-size: 14px;
+     }
+
+      .author .author-name{
+        font-size: 22px;
+      }
+
+      .author .author-about{
+        font-size: 18px;
+      }
+
+     .tags .tags-category .button{
+        font-size: 18px;
+        text-align:  justify;
+      }
+
+      .popular-posts{
+        position: relative;
+        top: 0px;
+      }
+
+      .tags{
+        position: relative;
+        top: 0px;
+      }
+}
+
+@media screen and (max-width: 767px) {
+     /* start of medium tablet styles */
+     #container-header{
+       font-size: 1.2em;
+     }
+     #container-main{
+       display: grid;
+       grid-template-columns: 1fr;
+       grid-template-areas:
+       "story"
+       "author"
+       "popular-posts"
+       "tags";
+     }
+     #story{
+       grid-area: story;
+     }
+     #author{
+       grid-area: author;
+     }
+     #tags{
+       grid-area: tags;
+     }
+     #popular-posts{
+       grid-area: popular-posts;
+     }
+     .tags .tags-category .button{
+       font-size: 20px;
+     }
+     .more-details > .story-readmore{
+       font-size: 14px;
+     }
+}
+
+@media screen and (max-width: 479px) {
+     /* start of phone styles */
+     #container-header{
+       font-size: 1.2em;
+     }
+     #container-main{
+       display: grid;
+       grid-template-columns: 1fr;
+       grid-template-areas:
+       "story"
+       "author"
+       "popular-posts"
+       "tags";
+     }
+     #story{
+       grid-area: story;
+     }
+     #author{
+       grid-area: author;
+     }
+     #tags{
+       grid-area: tags;
+     }
+     #popular-posts{
+       grid-area: popular-posts;
+     }
+     .story-wrap > .story-description{
+       font-size: 14px;
+     }
+
+     .story-description > .story-datetime{
+       font-size: 13px;
+     }
+
+     .story-content, .story-comment{
+      font-size: 12px;
+     }
+
+      .author .author-name{
+        font-size: 16px;
+      }
+
+      .author .author-about{
+        font-size: 14px;
+      }
+
+     .tags .tags-category .button{
+        font-size: 13px;
+      }
+
+     .more-details{
+       display: grid;
+       grid-template-columns: 100px;
+       justify-items: start;
+       position: relative;
+       top: -20px;
+       left: 10px;
+     }
+     .more-details .story-comment{
+       display: none;
+     }
+
+     .more-details > .story-readmore{
+       font-size: 13px;
+     }
+
+}
+
+/* ---------------- responsive ---------------*/

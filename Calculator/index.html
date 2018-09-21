@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="main.css" type="text/css">
+
+  <title>Calculator</title>
+</head>
+
+<body>
+  <div id="container">
+    <h2 id="created">Create by Hoang Anh</h2>
+    <form name="form">
+      <input type="text" id="result" disabled>
+      <input type="text" id="pre-result" disabled>
+    </form>
+    <table>
+      <tr>
+        <td><input class="button" type="button" value="C" onclick="press()"></td>
+        <td><input class="button" type="button" value="AC" onclick="press()"></td>
+        <td><input class="button" type="button" value="/" onclick="press()"></td>
+        <td><input class="button" type="button" value="x" onclick="press()"></td>
+      </tr>
+      <tr>
+        <td><input class="button" type="button" value="7" onclick="press()"></td>
+        <td><input class="button" type="button" value="8" onclick="press()"></td>
+        <td><input class="button" type="button" value="9" onclick="press()"></td>
+        <td><input class="button" type="button" value="+" onclick="press()"></td>
+      </tr>
+      <tr>
+        <td><input class="button" type="button" value="4" onclick="press()"></td>
+        <td><input class="button" type="button" value="5" onclick="press()"></td>
+        <td><input class="button" type="button" value="6" onclick="press()"></td>
+        <td><input class="button" type="button" value="-" onclick="press()"></td>
+      </tr>
+      <tr>
+        <td><input class="button" type="button" value="1" onclick="press()"></td>
+        <td><input class="button" type="button" value="2" onclick="press()"></td>
+        <td><input class="button" type="button" value="3" onclick="press()"></td>
+        <td rowspan="2"><input style="height: 115px" class="button" type="button" value="=" onclick="press()"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input style="width: 115px" class="button" type="button" value="0" onclick="press()"></td>
+        <td><input class="button" type="button" value="." onclick="press()"></td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    var result = document.getElementById('result');
+    var pre_result = document.getElementById('pre-result');
+    /* regular expression: to find a particular operation. Ex: (45 + 89)*/
+    var operation = /(\d+(\.\d+)?)([+\-x\/])(\d+(\.\d+)?)/;
+
+
+    /*
+    checking if the dot (.) is press or not
+    if it pressed, then isDot = true (true means make sure the dot only show 1 time).
+    */
+    var isDot = false;
+
+
+    /* function press(): to show a number or an operator to the screen */
+    function press() {
+      var btnValue = event.target.value;
+
+      switch (btnValue) {
+        case "AC":
+          result.value = "";
+          pre_result.value = "";
+          isDot = false;
+          break;
+        case "C":
+          pre_result.value = "";
+          isDot = false;
+          break;
+        case ".":
+          if (!isDot) {
+            pre_result.value += btnValue;
+            isDot = true;
+          }
+          break;
+        case "+":
+          pre_result.value += btnValue;
+          isDot = false;
+          break;
+        case "-":
+          pre_result.value += btnValue;
+          isDot = false;
+          break;
+        case "x":
+          pre_result.value += btnValue;
+          isDot = false;
+          break;
+        case "/":
+          pre_result.value += btnValue;
+          isDot = false;
+          break;
+        case "=":
+          var string = pre_result.value.match(operation);
+          var num1 = string[1]; // the number 1
+          var op = string[string.length - 3]; // the operator (+,-,x,/)
+          var num2 = string[string.length - 2]; // the number 2
+          result.value = calc(num1, op, num2);
+          break;
+        default:
+          pre_result.value += btnValue;
+          break;
+      }
+    }
+
+    /* this function is create to calculation of two number parameters then return a result of operation*/
+    function calc(num1, op, num2) {
+      switch (op) {
+        case "+":
+          result.value = (parseFloat(num1) + parseFloat(num2)).toFixed(2);
+          break;
+        case "-":
+          result.value = (parseFloat(num1) - parseFloat(num2)).toFixed(2);
+          break;
+        case "x":
+          result.value = (parseFloat(num1) * parseFloat(num2)).toFixed(2);
+          break;
+        case "/":
+          result.value = (parseFloat(num1) / parseFloat(num2)).toFixed(2);
+          break;
+      }
+      return result.value;
+    }
+
+  </script>
+</body>
+
+</html>

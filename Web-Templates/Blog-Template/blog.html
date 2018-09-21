@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href=".\public\css\style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Blog Template</title>
+</head>
+
+<body>
+  <div id="container">
+    <header id="container-header">
+      <h1 class="container-title">My Blog</h1>
+      <p class="container-description">Welcome to the blog of <span>HA</span></p>
+    </header>
+
+    <main id="container-main">
+      <!--using grid property to make 2 columns for each section-->
+
+      <!--story id # a part of grid container-->
+      <section id="story">
+        <div class="story">
+          <img src="https://i.imgur.com/MZ5ttNP.jpg" alt="pictures" class="story-img">
+          <div class="story-wrap">
+            <h2 class="story-title">Title</h2>
+            <h3 class="story-description">Title description,<span class="story-datetime">April 7, 2014</span></h3>
+            <p class="story-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas iste quibusdam expedita fugit perferendis nam, repudiandae recusandae, ex quos quas fugiat iusto, omnis nobis nulla eius neque? Nobis, voluptatem, aliquam!</p>
+            <!--more-detail class is use for define 2 columns. One is right and other is left using grid property-->
+            <div class="more-details">
+              <a href="#" class="story-readmore">Read More<i class="fa fa-angle-double-right" style="font-size:12px"></i></a>
+              <p class="story-comment">Comments</p>
+            </div>
+          </div>
+        </div>
+        <div class="story">
+          <img src="https://i.imgur.com/MZ5ttNP.jpg" alt="pictures" class="story-img">
+          <div class="story-wrap">
+            <h2 class="story-title">Title</h2>
+            <h3 class="story-description">Title description,<span class="story-datetime">April 7, 2014</span></h3>
+            <p class="story-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas iste quibusdam expedita fugit perferendis nam, repudiandae recusandae, ex quos quas fugiat iusto, omnis nobis nulla eius neque? Nobis, voluptatem, aliquam!</p>
+            <!--more-detail class is use for define 2 columns. One is right and other is left using grid property-->
+            <div class="more-details">
+              <a href="#" class="story-readmore">Read More<i class="fa fa-angle-double-right" style="font-size:12px"></i></a>
+              <p class="story-comment">Comments</p>
+            </div>
+          </div>
+        </div>
+        <div class="story">
+          <img src="https://i.imgur.com/MZ5ttNP.jpg" alt="pictures" class="story-img">
+          <div class="story-wrap">
+            <h2 class="story-title">Title</h2>
+            <h3 class="story-description">Title description,<span class="story-datetime">April 7, 2014</span></h3>
+            <p class="story-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas iste quibusdam expedita fugit perferendis nam, repudiandae recusandae, ex quos quas fugiat iusto, omnis nobis nulla eius neque? Nobis, voluptatem, aliquam!</p>
+            <!--more-detail class is use for define 2 columns. One is right and other is left using grid property-->
+            <div class="more-details">
+              <a href="#" class="story-readmore">Read More<i class="fa fa-angle-double-right" style="font-size:12px"></i></a>
+              <p class="story-comment">Comments</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--author id # a part of grid container-->
+      <section id="author">
+        <div class="author">
+          <img src="https://i.imgur.com/sqdgEVe.jpg" alt="" class="author-img">
+          <h2 class="author-name">My Name</h2>
+          <p class="author-about">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores earum necessitatibus placeat expedita quibusdam, vero et dolore dicta perferendis. Molestiae quam hic fuga obcaecati, pariatur perspiciatis nesciunt dolor maxime alias.</p>
+        </div>
+      </section>
+      <!--popular-posts id # a part of grid container-->
+      <section id="popular-posts">
+        <!--popular-posts using flex property to make 1 column for each link-->
+        <div class="popular-posts">
+          <div class="popular-posts-title title">Popular-posts</div>
+          <!--each link uses flex property to make row for content-->
+          <div class="popular-posts-link">
+            <img src="https://i.imgur.com/sxFE2Nc.jpg" alt="pictures" class="posts-img">
+            <h3 class="posts-title">Lorem</h3>
+            <h4 class="posts-description">Lorem ipsum.</h4>
+          </div>
+          <div class="popular-posts-link">
+            <img src="https://i.imgur.com/MZ5ttNP.jpg" alt="pictures" class="posts-img">
+            <h3 class="posts-title">Lorem</h3>
+            <h4 class="posts-description">Lorem ipsum.</h4>
+          </div>
+          <div class="popular-posts-link">
+            <img src="https://i.imgur.com/O98WHF5.jpg" alt="pictures" class="posts-img">
+            <h3 class="posts-title">Lorem</h3>
+            <h4 class="posts-description">Lorem ipsum.</h4>
+          </div>
+          <div class="popular-posts-link">
+            <img src="https://i.imgur.com/MZ5ttNP.jpg" alt="pictures" class="posts-img">
+            <h3 class="posts-title">Lorem</h3>
+            <h4 class="posts-description">Lorem ipsum.</h4>
+          </div>
+          <div class="popular-posts-link">
+            <img src="https://i.imgur.com/gMZ82et.png" alt="pictures" class="posts-img">
+            <h3 class="posts-title">Lorem</h3>
+            <h4 class="posts-description">Lorem ipsum.</h4>
+          </div>
+        </div>
+      </section>
+      <!--tags id # a part of grid container-->
+      <section id="tags">
+        <!--tags class has flex property to make 2 columns for title & category-->
+        <div class="tags">
+          <div class="tags-title title">Tags</div>
+          <!--
+          Inside tags-category has grid property.
+          Grid container uses auto-fit in order to fit column as much as possible
+          -->
+          <div class="tags-category">
+            <input class="button active" type="button" value="education">
+            <input class="button" type="button" value="technology">
+            <input class="button" type="button" value="healthy">
+            <input class="button" type="button" value="bussiness">
+            <input class="button" type="button" value="sports">
+            <input class="button" type="button" value="fashion">
+            <input class="button" type="button" value="national">
+            <input class="button" type="button" value="idol">
+            <input class="button" type="button" value="military">
+            <input class="button" type="button" value="car">
+            <input class="button" type="button" value="bike">
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="container-footer">
+      <h2 class="container-footer-title">Create By HoangAnh</h2>
+    </footer>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href=".\public\css\main.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>Shorten-Link</title>
+</head>
+
+<body>
+  <div id="container">
+    <h2 class="title">Shorten Link</h2>
+    <input type="text" id="input-field" required placeholder="Type your URL here...">
+    <div id="output-container">
+      <h3 id="output" onClick='copyText(this)'></h3>
+    </div>
+    <p style="color: gray; font-size: 20px; display: none" id="how-to-copy"> * click or touch the link to copy * </p>
+    <input type="button" value="Shorten" id="button">
+  </div>
+
+
+    <script src=".\public\js\script.js"></script>
+
+    <!--this function use for copy text-->
+    <script>
+      function copyText(element) {
+        var range, selection, worked;
+
+        if (document.body.createTextRange) {
+          range = document.body.createTextRange();
+          range.moveToElementText(element);
+          range.select();
+        } else if (window.getSelection) {
+          selection = window.getSelection();
+          range = document.createRange();
+          range.selectNodeContents(element);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+
+        try {
+          document.execCommand('copy');
+          alert('text copied');
+        } catch (err) {
+          alert('unable to copy text');
+        }
+      }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>To Do List</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href=".\css\main.css">
+
+</head>
+
+<body>
+
+  <div class="jumbotron text-center">
+    <h1>To Do App</h1>
+    <p>Created by Coding Solutions</p>
+    <form class="form-inline" id="form">
+      <div class="input-group">
+        <input type="text" class="form-control" size="50" placeholder="Please enter what you want to do!" id="text" required onkeypress="handle(event)">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-success" onclick="newElement()">Add</button>
+          <button type="button" class="btn btn-info" onclick="checkAll()">Check All</button>
+          <button type="button" class="btn btn-danger" onclick="removeAll()">Remove All</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <ul id="myUL">
+    <li>Coding An App</li>
+    <li class="checked">Eating</li>
+    <li>Sleeping</li>
+  </ul>
+
+  <script>
+    /* create a close click for each item */
+    var li = document.getElementsByTagName("li");
+    for (var i = 0; i < li.length; i++) {
+      var span = document.createElement("span");
+      var span_content = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(span_content);
+      li[i].appendChild(span);
+    }
+
+
+    /* remove the current item */
+    var listUL = document.getElementById("myUL");
+    var close = document.getElementsByClassName("close");
+    for (var i = 0; i < close.length; i++) {
+      close[i].onclick = function(ev) {
+        if (ev.target.nodeName === "SPAN") {
+          var currentItem = ev.target.parentElement;
+          listUL.removeChild(currentItem);
+        }
+      }
+    }
+
+
+    /* add checked each item */
+    listUL.addEventListener("click", function(ev) {
+      if (ev.target.nodeName === "LI") {
+        ev.target.classList.toggle("checked");
+        // if (ev.target.classList.contains("checked")) {
+        //
+        //   ev.target.classList.remove("checked");
+        // } else {
+        //   ev.target.classList.add("checked");
+        // }
+      }
+    });
+
+    /* add new item into list */
+    function newElement() {
+      var form = document.getElementById("form");
+      var inputValue = document.getElementById("text").value;
+      var li = document.createElement("li");
+      var li_content = document.createTextNode(inputValue);
+      li.appendChild(li_content);
+
+      if (inputValue === '') {
+        alert("you must enter something");
+      } else {
+        listUL.appendChild(li);
+
+      }
+
+      var span = document.createElement("span");
+      var span_content = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(span_content);
+      li.appendChild(span);
+
+      for (var i = 0; i < close.length; i++) {
+        close[i].onclick = function(ev) {
+          if (ev.target.nodeName === "SPAN") {
+            var currentItem = ev.target.parentElement;
+            listUL.removeChild(currentItem);
+          }
+        }
+      }
+
+      form.reset();
+    }
+
+    /* trigger enter button */
+    function handle(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault(); // Ensure it is only this code that runs
+        newElement();
+      }
+    }
+
+    /* check all current item on list */
+    function checkAll() {
+      for (var i = 0; i < li.length; i++) {
+        if (!li[i].classList.contains("checked")) {
+          li[i].classList.add("checked");
+        }
+      }
+    }
+
+    /* remove all current item on list */
+    function removeAll() {
+      var child = listUL.childNodes;
+      while (listUL.firstChild) {
+        listUL.removeChild(listUL.firstChild);
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>
