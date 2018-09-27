@@ -4,14 +4,88 @@ body{
 }
 
 #form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-    background: #ddd;
+    width: 50%;
+    height: 300px;
+    background: linear-gradient(#1e3c72, #3a7bd5);
+    border-radius: 5px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#wrap{
+    width: 75%;
+    margin: 0 auto;
 }
 
 h2{
     text-align: center;
+    color: whitesmoke;
+}
+
+#btnAdd{
+    margin-top: 30px;
+    color: #1e3c72;
+    border: 1px solid #1e3c72;
+    background: white;
+    transition: all ease-in-out 0.2s;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+#btnAdd:hover{
+    background: #1e3c72;
+    color: white;
+}
+
+#result{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(60px, 300px));
+    grid-gap: 20px;
+    justify-content: center;
+}
+
+#result > .item{
+    background: linear-gradient(45deg, #1e3c72, #3a7bd5);
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+.link{
+    color: white;
+    text-decoration: none;
+}
+
+.link:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.delete{
+    border-radius: 5px;
+    background: red;
+    color: white;
+    border: 1px solid red;
+    transition: all ease 0.2s;
+}
+
+.delete:hover{
+    transform: scale(0.8);
+}
+
+@media screen and (max-width: 1000px){
+    #form{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 550px){
+    #result{
+        display: grid;
+        grid-template-columns: repeat(1, minmax(60px, 300px));
+    }
 }
