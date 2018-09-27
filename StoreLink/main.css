@@ -1,0 +1,17 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    background: #ddd;
+}
+
+h2{
+    text-align: center;
+}
