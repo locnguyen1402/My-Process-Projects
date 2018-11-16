@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="/public/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <p style="text-align: center; color: red; background: yellow; font-size: 25px;">Created by Anh & Loc</p>
+    <ul id="messages"></ul>
+    <div>
+        <input id="u" autocomplete="off" placeholder="Username" />
+    </div>
+    <form action="">
+
+        <hr>
+        <input id="m" autocomplete="off" placeholder="Message" /><button>Send</button>
+    </form>
+
+    <script src="https://tgt-chat.herokuapp.com/socket.io/socket.io.js"></script>
+    <script>
+        $(function () {
+            let socket = io();
+            let user = 'default';
+
+            $('form').submit(function () {
+                socket.emit('chat', {
+                    username: $('#u').val(),
+                    message: $('#m').val()
+                });
+                $('#m').val('');
+                return false;
+            });
+
+            // lắng nghe sự kiện response từ server & msg là nội dung
+            socket.on('response', (user) => {
+                console.log(user);
+                $('#messages').append($('<li>').text(`${user.username}: ${user.message}`));
+            });
+        });
+    </script>
+</body>
+
+</html>
