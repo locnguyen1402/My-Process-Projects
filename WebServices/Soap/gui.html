@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="/public/style.css" type="text/css">
+    <title>Idol with SOAP</title>
+</head>
+
+<body>
+    <h1>Web Services</h1>
+    <input type="text" id="myInput" placeholder="Search for names..">
+
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </table>
+
+
+    <div id="login-box">
+        <div class="left">
+            <h1>Detail</h1>
+
+            <input type="text" name="name" placeholder="Name" id="name" />
+            <input type="text" name="phone" placeholder="Phone" id="phone" />
+            <input type="text" name="description" placeholder="Description" id="description" />
+            <input type="text" name="img" placeholder="Image" id="img" />
+
+            <input type="button" value="Save" id="save" />
+            <input type="button" value="Delete" id="delete" />
+            <input type="button" value="Edit" id="edit" />
+        </div>
+    </div>
+
+    <div id="display">
+    </div>
+
+    <script>
+        const socket = io();
+        let display = document.getElementById('display');
+
+        // attribute groups
+        let name = document.getElementById('name');
+        let phone = document.getElementById('phone');
+        let description = document.getElementById('description');
+        let img = document.getElementById('img');
+
+        // btn groups
+        let btnSave = document.getElementById('save');
+        let btnDelete = document.getElementById('delete');
+        let btnEdit = document.getElementById('edit');
+
+        // listening 
+        socket.on('hello', (res) => {
+            console.log(res.lastRequest);
+            let pRequest = document.createElement('p');
+            let reqContent = document.createTextNode(res.lastRequest);
+            pRequest.appendChild(reqContent);
+            display.appendChild(pRequest);
+
+            let hr = document.createElement('hr');
+            display.appendChild(hr);
+
+            let pResponse = document.createElement('p');
+            let resContent = document.createTextNode(res.lastResponse);
+            pResponse.appendChild(resContent);
+            display.appendChild(pResponse);
+        });
+
+        socket.on('load', (res) => {
+            //console.log(res);
+            let idols = [];
+            let array = str2Xml(res);
+            parser = new DOMParser();
+            for (let i = 0; i < array.length; i++) {
+                xmlDoc = parser.parseFromString(array[i], "text/xml");
+                let name = xmlDoc.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+                let phone = xmlDoc.getElementsByTagName("phone")[0].childNodes[0].nodeValue;
+                let description = xmlDoc.getElementsByTagName("description")[0].childNodes[0].nodeValue;
+                let img = xmlDoc.getElementsByTagName("img")[0].childNodes[0].nodeValue;
+
+                idols.push({
+                    name: name,
+                    phone: phone,
+                    description: description,
+                    img: img
+                });
+            }
+            loadIdols(idols);
+            detailIdol(idols);
+            searchIdols();
+        });
+
+        // handle click event
+        btnSave.addEventListener('click', () => {
+            if (checkEmpty(name.value, phone.value, description.value, img.value)) {
+                let idols = {
+                    name: name.value,
+                    phone: phone.value,
+                    description: description.value,
+                    img: img.value
+                };
+                socket.emit('new-idol', idols);
+                location.reload();
+            } else alert('you must fillfull the form');
+        });
+
+        btnDelete.addEventListener('click', () => {
+
+            if (name.value === "") {
+                alert('you must enter name to delete');
+            } else {
+                if (confirm('Are u sure to delete this document?')) {
+                    let obj = {
+                        name: name.value
+                    };
+                    socket.emit('delete', obj);
+                    location.reload();
+                } else return;
+            }
+
+        });
+
+        btnEdit.addEventListener('click', () => {
+            if (name.value !== "" && phone.value !== "" && description.value !== "") {
+                let obj = {
+                    byName: {
+                        name: name.value
+                    },
+                    newAttribute: {
+                        phone: phone.value,
+                        description: description.value
+                    }
+                };
+                console.log(obj);
+                socket.emit('edit', obj);
+                location.reload();
+            } else alert('you must fullfil: \nname\nphone\ndescription');
+        });
+
+        function loadIdols(idols) {
+            var arr = new Array(idols.length);
+            var table = document.getElementById('table');
+            var img;
+            for (var i = 0; i < idols.length; i++) {
+                img = document.createElement('img');
+                arr[i] = table.insertRow();
+                arr[i].insertCell().innerHTML = idols[i].name;
+                arr[i].insertCell().innerHTML = idols[i].phone;
+                arr[i].insertCell().innerHTML = idols[i].description;
+                img.src = idols[i].img;
+                img.classList.add('imgIdol');
+                arr[i].insertCell().appendChild(img);
+            };
+        }
+
+        function searchIdols() {
+            var input = document.getElementById("myInput");
+            input.addEventListener('keyup', function () {
+                var filter, table, tr, td, i;
+
+                filter = input.value.toUpperCase();
+                table = document.getElementById("table");
+                tr = table.getElementsByTagName("tr");
+
+                // Loop through all table rows, and hide those who don't match the search query
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            });
+        }
+
+        function checkEmpty(name, phone, description, img) {
+            return (name !== "" && phone !== "" && description !== "" && img !== "");
+        }
+
+        function str2Xml(res) {
+            let re = /<_doc>/g;
+            let len = res.match(re).length;
+            let array = [];
+            let start = 0,
+                end = 0;
+
+            for (let i = 0; i < len; i++) {
+                start = res.indexOf('<_doc>', start);
+                end = res.indexOf('</_doc>', end);
+                array.push(res.slice(start, end + 7));
+                start += 7;
+                end += 7;
+            }
+
+            let s = 0;
+            let e = 0;
+            let str = "";
+            for (let i = 0; i < array.length; i++) {
+                s = array[i].indexOf('<_id>');
+                e = array[i].indexOf('</_id>');
+                str = array[i].split('').splice(s, e + 6 - s).join('');
+                array[i] = array[i].replace(str, "");
+            }
+            return array;
+        }
+
+        function detailIdol(idols) {
+            console.log(idols);
+            var imgIdols = document.getElementsByClassName('imgIdol'); // 0 1 2 3
+            var name = document.getElementById('name');
+            var phone = document.getElementById('phone');
+            var description = document.getElementById('description');
+            var img = document.getElementById('img');
+
+            function details(index) {
+                name.value = idols[index].name;
+                phone.value = idols[index].phone;
+                description.value = idols[index].description;
+                img.value = idols[index].img;
+            }
+
+            for (let i = 0; i < imgIdols.length; i++) {
+                imgIdols[i].onclick = function () {
+                    details(i);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

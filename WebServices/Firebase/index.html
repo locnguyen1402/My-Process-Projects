@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script>
+    <title>Idol Firebase</title>
+</head>
+
+<body>
+    <input type="text" id="myInput" placeholder="Search for names..">
+
+    <table id="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Description</th>
+        </tr>
+    </table>
+
+    <div id="login-box">
+        <div class="left">
+            <h1>Detail</h1>
+
+            <input type="text" name="id" placeholder="Id" id="id" />
+            <input type="text" name="name" placeholder="Name" id="name" />
+            <input type="text" phone="email" placeholder="Phone" id="phone" />
+            <input type="text" description="password" placeholder="Description" id="description" />
+
+            <input type="button" value="Save" id="save" />
+            <input type="button" value="Edit" id="edit" />
+            <input type="button" value="Delete" id="delete" />
+
+        </div>
+    </div>
+
+    <!-- <script>
+
+        let imgIdols = document.getElementsByClassName('imgIdol'); // 0 1 2 3
+        let name = document.getElementById('name');
+        let phone = document.getElementById('phone');
+        let description = document.getElementById('description');
+        let image = document.getElementById('image');
+
+        function details(index) {
+            name.value = idols[index].name;
+            phone.value = idols[index].phone;
+            description.value = idols[index].description;
+            image.value = idols[index].img;
+        }
+
+        for (let i = 0; i < imgIdols.length; i++) {
+            imgIdols[i].onclick = function () {
+                details(i);
+            }
+        }
+    </script> -->
+    <script type="module">
+
+        import loadIdols from './handle.js';
+
+        // Initialize Firebase
+        let config = {
+            apiKey: "AIzaSyCIvoG48Ky8BDxklEwakCDL6x3PHVd0eM4",
+            authDomain: "idolfirebase.firebaseapp.com",
+            databaseURL: "https://idolfirebase.firebaseio.com",
+            projectId: "idolfirebase",
+            storageBucket: "idolfirebase.appspot.com",
+            messagingSenderId: "560455717466"
+        };
+        firebase.initializeApp(config);
+        console.log(firebase);
+
+        let database = firebase.database();
+        let idols = database.ref("idols");
+
+        idols.once("value")
+            .then(function (snapshot) {
+                console.log(snapshot); // idols = key 
+                snapshot.forEach((child) => {
+                    loadIdols(child, snapshot);
+                });
+            });
+
+
+    </script>
+
+
+    <!-- this script is used to search idol in table tag -->
+    <script>
+        let input = document.getElementById("myInput");
+        input.addEventListener('keyup', () => {
+            let filter, table, tr, td, i;
+
+            filter = input.value.toUpperCase();
+            table = document.getElementById("table");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

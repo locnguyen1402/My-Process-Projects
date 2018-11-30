@@ -1,0 +1,137 @@
+<definitions name="IdolService"
+   targetNamespace="http://www.examples.com/wsdl/IdolService.wsdl"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:tns="http://www.examples.com/wsdl/IdolService.wsdl"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+   <!-- say Hello function -->
+   <message name="SayHelloRequest">
+    <part name="firstName" type="xsd:string"/>
+   </message>
+   <message name="SayHelloResponse">
+    <part name="greeting" type="xsd:string"/>
+   </message>
+
+   <!-- load function -->
+   <message name="loadRequest">
+    <part name="load" type="xsd:string"/>
+   </message>
+   <message name="loadResponse">
+    <part name="loadObj" type="xsd:string"/>
+   </message>
+
+   <!-- create function -->
+   <message name="createRequest">
+    <part name="idol" type="xsd:string"/>
+   </message>
+   <message name="createResponse">
+    <part name="idolObj" type="xsd:string"/>
+   </message>
+
+   <!-- delete function -->
+   <message name="deleteRequest">
+    <part name="idol" type="xsd:string"/>
+   </message>
+   <message name="deleteResponse">
+    <part name="idolObj" type="xsd:string"/>
+   </message>
+
+   <!-- edit function -->
+   <message name="editRequest">
+    <part name="idol" type="xsd:string"/>
+   </message>
+   <message name="editResponse">
+    <part name="idolObj" type="xsd:string"/>
+   </message>
+
+   <!-- port Type -->
+   <portType name="Idol_PortType">
+    <operation name="sayHello">
+       <input message="tns:SayHelloRequest"/>
+       <output message="tns:SayHelloResponse"/>
+    </operation>
+
+    <operation name="create">
+      <input message="tns:createRequest"/>
+      <output message="tns:createResponse"/>
+    </operation>
+
+    <operation name="load">
+      <input message="tns:loadRequest"/>
+      <output message="tns:loadResponse"/>
+    </operation>
+
+    <operation name="delete">
+      <input message="tns:deleteRequest"/>
+      <output message="tns:deleteResponse"/>
+    </operation>
+
+    <operation name="edit">
+      <input message="tns:editRequest"/>
+      <output message="tns:editResponse"/>
+    </operation>
+   </portType>
+
+   <!-- Binding -->
+   <binding name="Idol_Binding" type="tns:Idol_PortType">
+   <soap:binding style="document"
+    transport="http://schemas.xmlsoap.org/soap/http"/>
+   <operation name="sayHello">
+    <soap:operation soapAction="sayHello"/>
+    <input>
+       <soap:body
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+        namespace="urn:examples:IdolService"
+        use="encoded"/>
+    </input>
+    <output>
+       <soap:body
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+        namespace="urn:examples:IdolService"
+        use="encoded"/>
+    </output>
+   </operation>
+
+   <operation name="loading">
+    <soap:operation soapAction="loading"/>
+    <input>
+       <soap:body
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+        namespace="urn:examples:IdolService"
+        use="encoded"/>
+    </input>
+    <output>
+       <soap:body
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+        namespace="urn:examples:IdolService"
+        use="encoded"/>
+    </output>
+   </operation>
+
+   <operation name="create">
+    <soap:operation soapAction="create"/>
+    <input>
+       <soap:body
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+        namespace="urn:examples:IdolService"
+        use="encoded"/>
+    </input>
+    <output>
+       <soap:body
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+        namespace="urn:examples:IdolService"
+        use="encoded"/>
+    </output>
+   </operation>
+   </binding>
+
+   <!-- Service -->
+   <service name="Idol_Service">
+    <documentation>WSDL File for IdolService</documentation>
+    <port binding="tns:Idol_Binding" name="Idol_Port">
+       <soap:address
+        location="http://localhost:6969/wsdl"/>
+    </port>
+   </service>
+</definitions>
