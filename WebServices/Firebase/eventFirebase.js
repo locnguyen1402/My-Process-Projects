@@ -4,20 +4,19 @@ export class eventFB {
     }
 
     add(snapshot, table) {
-        // trả về data của idol được thêm
-        let data = snapshot.val();
         
+        // gắn các thuộc tính vào biến data
+        let data = snapshot.val();
         let arr = new Array();
-        let index = localStorage.getItem('length');
-        arr[index] = table.insertRow();
-        // thêm class index vào thẻ td đầu tiên
-        let firstTD = arr[index].insertCell();
+        arr[0] = table.insertRow();
+        // thêm class 0 vào thẻ td đầu tiên
+        let firstTD = arr[0].insertCell();
         firstTD.classList.add('index');
         firstTD.innerHTML = snapshot.key;
 
-        arr[index].insertCell().innerHTML = data.name;
-        arr[index].insertCell().innerHTML = data.phone;
-        arr[index].insertCell().innerHTML = data.description;
-        console.log(arr.length);
+        arr[0].insertCell().innerHTML = data.name;
+        arr[0].insertCell().innerHTML = data.phone;
+        arr[0].insertCell().innerHTML = data.description;
+        console.log('arr length: ' + arr.length);
     }
 }
