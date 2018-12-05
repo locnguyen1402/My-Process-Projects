@@ -30,36 +30,14 @@
             <input type="text" phone="email" placeholder="Phone" id="phone" />
             <input type="text" name="desciption" placeholder="Description" id="description" />
             
-            <input type="text" name="id" id="id" placeholder="ID for deleting..." disabled/>
+            <input type="text" name="id" id="id" placeholder="ID for deleting & editing..." disabled/>
             <input type="button" value="Save" id="save" />
             <input type="button" value="Edit" id="edit" />
             <input type="button" value="Delete" id="delete" />
 
         </form>
     </div>
-
-    <!-- <script>
-
-        let imgIdols = document.getElementsByClassName('imgIdol'); // 0 1 2 3
-        let name = document.getElementById('name');
-        let phone = document.getElementById('phone');
-        let description = document.getElementById('description');
-        let image = document.getElementById('image');
-
-        function details(index) {
-            name.value = idols[index].name;
-            phone.value = idols[index].phone;
-            description.value = idols[index].description;
-            image.value = idols[index].img;
-        }
-
-        for (let i = 0; i < imgIdols.length; i++) {
-            imgIdols[i].onclick = function () {
-                details(i);
-            }
-        }
-    </script> -->
-    <script type="module" src="./firebase.js"></script>
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>

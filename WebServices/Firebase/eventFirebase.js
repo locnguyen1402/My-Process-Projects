@@ -14,9 +14,20 @@ export class eventFB {
         firstTD.classList.add('index');
         firstTD.innerHTML = snapshot.key;
 
-        arr[0].insertCell().innerHTML = data.name;
-        arr[0].insertCell().innerHTML = data.phone;
-        arr[0].insertCell().innerHTML = data.description;
+        let secondTD = arr[0].insertCell();
+        secondTD.classList.add('name');
+        secondTD.innerHTML = data.name;
+
+        let thirdTD = arr[0].insertCell();
+        thirdTD.classList.add('phone');
+        thirdTD.innerHTML = data.phone;
+
+
+        let fourthTD = arr[0].insertCell();
+        fourthTD.classList.add('description');
+        fourthTD.innerHTML = data.description;
+
+
         console.log('arr length: ' + arr.length);
     }
 }

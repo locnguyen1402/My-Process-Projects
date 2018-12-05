@@ -7,9 +7,9 @@ export class idolClass {
         // thêm 1 idol mới
         // khi dùng push thì Firebase sẽ tự động tạo 1 ID riêng biệt
         idolsFB.push({
-            name: name,
-            phone: phone,
-            description: description
+            name: name.value,
+            phone: phone.value,
+            description: description.value
         });
     }
 
@@ -22,5 +22,14 @@ export class idolClass {
         .catch(function (error) {
             console.log("Remove failed: " + error.message);
         });
+    }
+
+    update(idolKey, name, phone, description){
+        let data = {
+            name: name.value,
+            phone: phone.value,
+            description: description.value
+        };
+        idolKey.update(data);
     }
 }
