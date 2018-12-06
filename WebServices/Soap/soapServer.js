@@ -7,7 +7,7 @@ const soap = require('soap');
 
 // connect to Mongoose database
 const idolDB = require('./db');
-
+console.log(request.headers.host);
 // define my IdolService for wsdl
 const idolservice = {
     Idol_Service: {
