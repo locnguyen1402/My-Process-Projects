@@ -36,7 +36,7 @@ const idolservice = {
             delete: (idolName) => {
                 idolDB.deleteOne(idolName, (err) => {
                     if (err) throw err;
-                    console.log('deleted' + res);
+                    console.log('deleted');
                 });
             },
 
@@ -121,14 +121,15 @@ io.on('connection', (socket) => {
             });
         });
 
-        socket.on('delete', (res) => {
-            console.log(res);
-            client.delete(res, (err, result) => {
+        socket.on('delete', (name) => {
+            console.log(name);
+            client.delete(name, (err, result) => {
                 console.log(client.describe());
             });
         });
 
         socket.on('edit', (res) => {
+            console.log(res);
             client.edit(res, (err, result) => {
                 console.log(client.describe());
             });
